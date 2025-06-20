@@ -1,16 +1,17 @@
-## First Day
+# 🚀 Day 1 Tasks
 
- # Backend 
- - [x] set up mongodb for backend and make the schema
- - [x] Add authentication 
- - [ ] set up the web socket layer for the backend 
- - [ ] structure the web socket folder of the backend 
- - [ ] set up the gemini api / open ai api for question generation 
+## 🔧 Backend
 
- # Frontend
- - [ ] Init a empty react project
- - [ ] make a dummy signup/signin page
- - [ ] make a dummy landing page 
- - [ ] make a dummy join/create room page 
- - [ ] finding how to compile code any language in frontend
+- [x] Set up MongoDB and define Mongoose schema
+- [x] Implement user authentication (JWT / session)
+- [ ] Establish WebSocket layer
+- [ ] Organize WebSocket-related code into a structured folder
+- [ ] Integrate Gemini API / OpenAI API for question generation
 
+## 🎨 Frontend
+
+- [ ] Initialize empty React project (Vite/CRA/Next.js)
+- [ ] Create dummy **Signup / Signin** page
+- [ ] Create dummy **Landing** page
+- [ ] Create dummy **Join / Create Room** page
+- [ ] Research how to compile any programming language code from frontend 
