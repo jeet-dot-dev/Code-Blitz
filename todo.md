@@ -1,5 +1,5 @@
 ## Backend (First Half)
-- [ ] set up mongodb for backend and make the schema
+- [x] set up mongodb for backend and make the schema
 - [ ] Add authentication 
 - [ ] set up the web socket layer for the backend 
 - [ ] structure the folder of the backend 
