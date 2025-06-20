@@ -1,13 +1,13 @@
-### First Half
+## First Day
 
- ## Backend 
+ # Backend 
  - [x] set up mongodb for backend and make the schema
  - [x] Add authentication 
  - [ ] set up the web socket layer for the backend 
  - [ ] structure the web socket folder of the backend 
  - [ ] set up the gemini api / open ai api for question generation 
 
- ## Frontend
+ # Frontend
  - [ ] Init a empty react project
  - [ ] make a dummy signup/signin page
  - [ ] make a dummy landing page 
