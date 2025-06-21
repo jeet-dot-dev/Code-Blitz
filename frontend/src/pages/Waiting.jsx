@@ -14,8 +14,18 @@ const Waiting = () => {
       socket.emit("getRoomData", { roomId: roomID });
     }
 
+    socket.on("roomJoined", (newData) => {
+      console.log("Player joined:", newData);
+    });
+
+    socket.on("roomMessage", (message) => {
+      console.log("Room Message:", message.msg);
+    });
+
     return () => {
       socket.off("roomData");
+      socket.off("roomJoined");
+      socket.off("roomMessage");
     };
   }, [socket]);
 

@@ -2,9 +2,17 @@ import React from 'react'
 import Login from './pages/Login'
 const App = () => {
   return (
-    <div>
-    <Login/>
-    </div>
+   <>
+    <Route
+  path="/room/waiting"
+  element={
+    <ProtectRoute>
+      <Waiting />
+    </ProtectRoute>
+  }
+    />
+
+   </>
   )
 }
 
