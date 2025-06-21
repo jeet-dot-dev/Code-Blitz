@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
-import User from '../../models/userSchems';
-import getQuestionsFromAi from '../ai/GenQuestions';
+import User from '../../models/userSchems.js';
+import getQuestionsFromAi from '../ai/GenQuestions.js';
+import { createRoom } from '../store/roomStore.js';
 export const handleCreateRoom = async (socket, data) => {
     const token = data.token;
     if(!token) {
@@ -30,7 +31,7 @@ export const handleCreateRoom = async (socket, data) => {
             roomID: roomID,
             roomType: data.roomType,
             questions: questions.questions,
-            creator: { id: decoded.userId, name: user.name, elo: user.elo, joinedAt: Date.now() },
+            creator: { id: decoded.userId, name: user.username, elo: user.elo, joinedAt: Date.now() },
             joiner: {},
             players: [decoded.userId],
             battleStarted: false,

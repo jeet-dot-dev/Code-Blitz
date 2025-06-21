@@ -5,6 +5,7 @@ import connectDB from './db/db.js';
 import userRouter from './routes/userRoute.js';
 import { createServer } from "node:http";
 import { Server } from "socket.io";
+import { handleConnection } from "./socket/socketHandlers.js";
 import socketInit from './sockets/index.js';
 const app = express();
 

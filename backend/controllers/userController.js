@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt'
 
 const signupHandler = async (req,res)=>{
  try {
-    const  { name, email, password } = req.body;
+    const  { username, email, password } = req.body;
     console.log("Signup request body:", req.body);
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
         return res.status(400).json({ message: 'All fields are required' });
     }       
     const existingUser = await User.find({email});
@@ -16,7 +16,7 @@ const signupHandler = async (req,res)=>{
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
-        name,
+        username,
         email,
         password: hashedPassword
     });
