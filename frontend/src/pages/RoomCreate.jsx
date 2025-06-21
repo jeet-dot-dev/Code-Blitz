@@ -234,8 +234,9 @@ const RoomCreate = () => {
     };
 
     const handleJoinRoom = (data) => {
-
-      localStorage.setItem("roomID", data.roomId);
+       console.log("hey hello");
+       console.log(data)
+      localStorage.setItem("roomID", data?.roomID);
 
       navigate(`/room/waiting`);
     };

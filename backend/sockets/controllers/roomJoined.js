@@ -74,7 +74,7 @@ export const handleRoomJoined = async (socket, data) => {
 
     //console.log(`User ${user.name} joined room ${roomID}`);
     // Optionally, you can send the room data back to the client
-    io.emit("roomJoined", room);
+   io.to(roomID).emit("roomJoined", room)
   } catch (err) {
     console.error("Error joining room:", err);
     socket.emit("error", { message: "Invalid token" });

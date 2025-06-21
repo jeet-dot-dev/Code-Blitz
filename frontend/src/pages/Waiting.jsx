@@ -40,6 +40,7 @@ const Waiting = () => {
 
     // Listen for someone joining the room
     socket.on("roomJoined", (newRoomData) => {
+      console.log("hello562",newRoomData);
       //console.log("New player joined the room:", newRoomData);
       useRoomStore.getState().setRoomData(newRoomData);
     });
