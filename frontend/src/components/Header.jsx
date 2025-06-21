@@ -1,5 +1,6 @@
+import GameTimer from "./GameTimer";
 
-const Header = ({ room }) => {
+const Header = ({ room , handleautoSubmit }) => {
   const roomId = localStorage.getItem("roomID");
   
   if (!room) {
@@ -26,7 +27,7 @@ const Header = ({ room }) => {
             onError={(e) => {e.target.style.display = 'none'}}
           />
           <div className="flex flex-col items-center">
-            <span className="text-yellow-400">Time</span>
+            <span className="text-yellow-400"><GameTimer handleautoSubmit={handleautoSubmit}/></span>
             <span>{room?.questions?.estimatedTime || 'N/A'}</span>
           </div>
         </div>

@@ -11,6 +11,7 @@ import analyzeBattle from "../ai/analyze.js";
 
 
 const handleSubmitCode = async (socket, data) => {
+  console.log("hatbehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",data)
   try {
     // 🟩 Validate the user
     const user = await User.findById(data.playerId);

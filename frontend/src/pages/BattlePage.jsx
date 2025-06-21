@@ -13,6 +13,8 @@ const BattlePage = () => {
   const socket = useContext(SocketContext);
   const roomData = useRoomStore((state) => state.roomData);
   const [compileCode, setCompileCode] = useState("");
+  const [editorCode, setEditorCode] = useState("");
+  const [lang , Setlang] = useState("")
   //console.log("BattlePage roomData:", roomData);
 
   useEffect(() => {
@@ -60,14 +62,34 @@ const BattlePage = () => {
 
    console.log(roomData);
 
+
+const handleautoSubmit = () => {
+  const id = localStorage.getItem("id");
+  if (!id) {
+    console.error("Player ID not found in localStorage");
+    return;
+  }
+
+  const data = {
+    playerId: id,
+    language: lang,
+    submitted_code: editorCode,  // ✅ use the latest code in editor
+    room: roomData
+  };
+  socket.emit("codeSubmited", data);
+};
+
+
   if (!roomData) {
     return <div>Loading...</div>;
   }
 
+
+
   return (
     <div className="h-screen w-full grid grid-rows-12 overflow-hidden">
       <div className="header row-span-1 bg-black">
-        <Header room={roomData} />
+        <Header room={roomData} handleautoSubmit={handleautoSubmit} />
       </div>
       <div className="main row-span-11 grid grid-cols-12 overflow-hidden">
         <div className="question-palte col-span-4 bg-amber-300 overflow-y-auto">
@@ -78,7 +100,7 @@ const BattlePage = () => {
         </div>
         <div className="editor col-span-8 grid grid-rows-12 overflow-hidden">
           <div className="monaco-editor row-span-8 overflow-hidden">
-            <EditorComp setCompileCode={setCompileCode} room={roomData} />
+            <EditorComp setCompileCode={setCompileCode} room={roomData} Setlang={Setlang} setEditorCode={setEditorCode} />
           </div>
           <div className="compiler row-span-4 bg-[#0F0F0F] text-white p-4 overflow-y-auto">
             <pre className="whitespace-pre-wrap break-words text-sm">

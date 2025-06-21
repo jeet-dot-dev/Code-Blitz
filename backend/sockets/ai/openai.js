@@ -4,25 +4,23 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-//console.log(process.env.OPENAI_API_KEY);
+  apiKey: process.env.OPENAI_API_KEY
+ })
 
 const getQuestionsFromOpenAI = async (topic, difficulty) => {
   const prompt = `
-You are a professional problem setter for coding interviews. Generate one coding questions based on the following criteria:
+You are a professional problem setter for coding interviews. Generate one unique coding question based on the following criteria:
 
 - Topic: ${topic}
 - Difficulty: ${difficulty}
 - Each question should have:
-  1. A clear problem statement
-  2. Example input/output
-  3. Constraints if needed
+  1️⃣ A clear problem statement
+  2️⃣ Example input/output
+  3️⃣ Constraints if needed
 
-Also provide an estimated total completion time for all questions based on their difficulty level.
+⚠ Return ONLY valid JSON, no explanations, no text before or after the JSON.
 
-Output format (as a JSON object):
+The output must follow this format exactly:
 {
   "questions": [
     {
@@ -30,44 +28,56 @@ Output format (as a JSON object):
       "description": "<full problem statement>",
       "exampleInput": "<example input>",
       "exampleOutput": "<example output>"
-    },
-    ...
+    }
   ],
-  "estimatedTime": "<time in minutes (e.g., '30 min', '45 min')>"
+  "estimatedTime": <integer value in minutes>
 }
 
-Make sure the problems are unique and clear. Estimate time based on difficulty: easy (10-15 min per question), medium (20-25 min per question), hard (30-40 min per question).
+💡 The estimatedTime must be a single integer (e.g., 10, 20, 30) based on difficulty:
+easy = 10, medium = 20, hard = 30.
 `;
 
-  const response = await client.chat.completions.create({
-    model: "gpt-3.5-turbo", // ✅ switched to 3.5
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are a helpful assistant for generating programming questions.",
-      },
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-  });
-
   try {
+    const response = await client.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful assistant for generating programming questions.",
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    });
+
     let raw = response.choices[0].message.content;
+    
+    // Remove code fences if they exist
     raw = raw.replace(/```json|```/g, "").trim();
+
+    // Optional: Remove accidental explanation lines (just in case)
+    raw = raw.split('\n').filter(line => {
+      return !line.toLowerCase().startsWith("explanation") &&
+             !line.toLowerCase().startsWith("output");
+    }).join('\n');
+
     const result = JSON.parse(raw);
-    console.log("Generated questions:", result.questions);
-    console.log("Estimated completion time:", result.estimatedTime);
+
+    console.log("✅ Generated questions:", JSON.stringify(result.questions, null, 2));
+    console.log("✅ Estimated completion time (min):", result.estimatedTime);
+
     return result;
+
   } catch (error) {
-    console.error("Failed to parse JSON:", error);
-    console.log("Raw response:", response.choices[0].message.content);
-    throw new Error("OpenAI returned malformed JSON");
+    console.error("❌ Failed to parse or fetch question:", error);
+    console.log("🔹 Raw response:\n", response?.choices?.[0]?.message?.content || "No content");
+    throw new Error("OpenAI returned invalid or malformed JSON");
   }
 };
 
-//getQuestionsFromOpenAI("Array","2","easy");
-
 export default getQuestionsFromOpenAI;
+
+// Example usage
+ //getQuestionsFromOpenAI("Array", "hard");

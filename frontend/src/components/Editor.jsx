@@ -7,7 +7,7 @@ import { SocketContext } from "../SocketContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-const EditorComp = ({ setCompileCode,room }) => {
+const EditorComp = ({ setCompileCode,room ,Setlang ,setEditorCode}) => {
   // Fixed: Use "JavaScript" (capitalized) to match your languageMap keys
     const socket = useContext(SocketContext);
     const navigate = useNavigate();
@@ -51,6 +51,10 @@ const EditorComp = ({ setCompileCode,room }) => {
     }
   },[socket,navigate])
 
+
+  useEffect(()=>{
+    Setlang(lang)
+  },[Setlang,lang])
 
 
 
@@ -161,7 +165,7 @@ const EditorComp = ({ setCompileCode,room }) => {
         language={languageMap[lang]?.language || "plaintext"}
         theme="vs-dark"
         value={boilerplate}
-        onChange={(newValue) => setBoilerplate(newValue)}
+        onChange={(newValue) => {setBoilerplate(newValue),setEditorCode(newValue)}}
       />
     </div>
   );
