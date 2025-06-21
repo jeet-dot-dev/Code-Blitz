@@ -10,8 +10,8 @@
 
 ## 🎨 Frontend
 
-- [ ] Initialize empty React project (Vite/CRA/Next.js)
-- [ ] Create dummy **Signup / Signin** page
+- [x] Initialize empty React project (Vite/CRA/Next.js)
+- [x] Create dummy **Signup / Signin** page
 - [ ] Create dummy **Landing** page
 - [ ] Create dummy **Join / Create Room** page
 - [ ] Research how to compile any programming language code from frontend 
