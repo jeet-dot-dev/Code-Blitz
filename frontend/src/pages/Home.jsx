@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import FloatingNav from '../components/Navbar'
 
 const Home = () => {
   return (
     <>
-        <Navbar/>
+        <FloatingNav/>
       <div className='flex flex-col  h-screen w-full bg-[#000] font-press overflow-hidden'>
         {/* Cursor Aura */}
         <div
