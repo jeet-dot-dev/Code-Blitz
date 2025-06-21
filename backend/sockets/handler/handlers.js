@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { handleCreateRoom } from '../controllers/roomCreated.js';
-import { handleJoinRoom } from '../controllers/joinRoom.js';
+import { handleCreateRoom } from '../controllers/roomCreated';
 
 export const socketHandlers = (socket) => {
     // console.log("User connected:", socket.id);
@@ -27,4 +26,9 @@ socket.on("startGame",(data) =>{
   handleGameStart(socket,data);
 
 });
+
+socket.on("codeSubmited",(data)=>{
+  handleSubmitCode(socket,data);
+})
+
 }
