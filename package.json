@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@gsap/react": "^2.1.2",
-    "sonner": "^2.0.5",
-    "sooner": "^1.1.4"
-  }
-}
