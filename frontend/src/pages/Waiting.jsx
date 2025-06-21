@@ -7,7 +7,7 @@ const Waiting = () => {
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
   const roomData = useRoomStore((state) => state.roomData);
-  const [isStarting, setIsStarting] = useState(false);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  const [isStarting, setIsStarting] = useState(false);
 
   useEffect(() => {
     if (!socket) return;
@@ -50,31 +50,28 @@ const Waiting = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-6">
-      <h2 className="text-2xl font-semibold mb-4">Waiting Room</h2>
+    <div className="min-h-screen flex items-center justify-center bg-[#0D0D0D] text-white px-4 py-6">
+      <div className="w-full max-w-4xl bg-[#1A1A1A] border border-purple-700 rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-bold mb-6 text-center">Waiting Room</h2>
 
-      <div className="bg-zinc-900 p-6 rounded-xl shadow-md w-full max-w-md">
-        <div className="mb-4">
-          <h3 className="text-xl font-bold text-purple-400 mb-2">Creator</h3>
-          <p className="text-white text-sm">
-            {roomData?.creator?.name || "Loading..."}
-          </p>
-        </div>
-
-        <div className="mb-6">
-          <h3 className="text-xl font-bold text-blue-400 mb-2">Joiner</h3>
-          <p className="text-white text-sm">
-            {roomData?.joiner?.name || "Waiting for player..."}
-          </p>
+        <div className="grid grid-cols-2 gap-6 mb-6">
+          <div className="bg-[#121212] p-4 rounded-xl border border-purple-600">
+            <h3 className="text-lg font-semibold text-purple-400 mb-2">Creator</h3>
+            <p>{roomData?.creator?.name || "Loading..."}</p>
+          </div>
+          <div className="bg-[#121212] p-4 rounded-xl border border-blue-600">
+            <h3 className="text-lg font-semibold text-blue-400 mb-2">Joiner</h3>
+            <p>{roomData?.joiner?.name || "Waiting for player..."}</p>
+          </div>
         </div>
 
         {bothPlayersPresent && (
-          <>
+          <div className="mt-4">
             {isRoomOwner ? (
               <button
                 onClick={startGame}
                 disabled={isStarting}
-                className="w-full bg-purple-600 text-white font-semibold py-2 rounded hover:bg-purple-700 transition"
+                className="w-full bg-gradient-to-r from-purple-700 to-purple-500 text-white font-semibold py-3 rounded-lg hover:opacity-90 transition"
               >
                 {isStarting ? "Starting Game..." : "Start Game"}
               </button>
@@ -83,7 +80,7 @@ const Waiting = () => {
                 Waiting for host to start the game...
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
