@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import useRoomStore from "../store/roomStore";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { SocketContext } from "../SocketContext";
-import EditorComp from "../ui/Editor";
-import QuestionSection from "../ui/QuestionSection";
-import Header from "../ui/Header";
+import { SocketContext } from "../../SocketContex";
+import EditorComp from "../components/Editor";
+import QuestionSection from "../components/QuestionsScetion";
+import Header from "../components/Header";
 import { toast } from "sonner";
 
 const BattlePage = () => {

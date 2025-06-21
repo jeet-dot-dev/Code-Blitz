@@ -6,8 +6,9 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
-import { cn } from "../../lib/utils";
+} from "framer-motion"; 
+
+import { cn } from "../lib/utils";
 
 
 export const FloatingNav = ({

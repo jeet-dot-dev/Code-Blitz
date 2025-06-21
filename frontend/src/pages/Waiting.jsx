@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SocketContext } from "../SocketContext";
+import { SocketContext } from "../../SocketContex";
 import useRoomStore from "../store/roomStore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

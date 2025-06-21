@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, use } from "react"; // Add useRef import
 import { useNavigate } from "react-router-dom";
-import { SocketContext } from "../SocketContext";
+import { SocketContext } from "../../SocketContex";
 import { useContext } from "react";
 import useRoomStore from "../store/roomStore";
-import FloatingNavDemo from "../ui/Navbar";
+import FloatingNavDemo from "../components/Navbar";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
