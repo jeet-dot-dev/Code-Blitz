@@ -1,4 +1,3 @@
-# 🚀 Day 1 Tasks
 
 ## 🔧 Backend
 

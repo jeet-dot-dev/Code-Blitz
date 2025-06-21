@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/userSchema.js';
+import User from '../models/userSchems.js';
 import bcrypt from 'bcrypt'
 
 const signupHandler = async (req,res)=>{
