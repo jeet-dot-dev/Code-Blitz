@@ -1,19 +1,17 @@
-// App.jsx
 import { Route, Routes } from "react-router-dom";
-import BattlePage from "./components/BattlePage";
-import Home from "./components/Home";
-import Auth from "./components/Auth";
+import BattlePage from "./pages/BattlePage";
+import Home from "./pages/Home";
+import Auth from "./pages/Login";
 import ProtectRoute from "./utils/ProtectRoute";
-import RoomCreate from "./components/RoomCreate";
+import RoomCreate from "./pages/RoomCreate";
 import { io } from "socket.io-client";
-import { SocketContext } from "./SocketContext";
-import { useState } from "react";
-import { useEffect } from "react";
-import Waiting from "./components/Waiting";
-import ResWait from "./components/ResWait";
-import Result from "./components/Result";
+import { SocketContext } from "../SocketContex";
+import { useState, useEffect } from "react";
+import Waiting from "./pages/Waiting";
+import ResWait from "./pages/ResWait";
+import Result from "./pages/Result";
 import { Toaster } from "sonner";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const [socket, setSocket] = useState(null);
@@ -23,6 +21,7 @@ const App = () => {
     setSocket(newSocket);
     return () => newSocket.disconnect();
   }, []);
+
   return (
     <SocketContext.Provider value={socket}>
       <Routes>
@@ -45,12 +44,12 @@ const App = () => {
           }
         />
         <Route
-        path="/profile"
-        element={
-          <ProtectRoute>
-            <Profile/>
-          </ProtectRoute>
-        }
+          path="/profile"
+          element={
+            <ProtectRoute>
+              <Profile />
+            </ProtectRoute>
+          }
         />
         <Route
           path="/res/waiting"
@@ -77,6 +76,7 @@ const App = () => {
           }
         />
       </Routes>
+
       <Toaster
         position="top-right"
         toastOptions={{
