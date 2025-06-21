@@ -49,3 +49,31 @@ export const handleCreateRoom = async (socket, data) => {
         return;
     }
 }
+
+// Room management controllers
+export const handleRoomCreated = (socket, io) => {
+  socket.on('createRoom', (data) => {
+    try {
+      const { roomName, userId } = data;
+      
+      if (!roomName || !userId) {
+        socket.emit('error', { message: 'Room name and user ID are required' });
+        return;
+      }
+      
+      const roomId = `room_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      socket.join(roomId);
+      socket.emit('roomCreated', { 
+        roomId, 
+        roomName, 
+        message: `Room ${roomName} created successfully` 
+      });
+      
+      console.log(`Room ${roomName} (${roomId}) created by user ${userId}`);
+    } catch (error) {
+      console.error('Error creating room:', error);
+      socket.emit('error', { message: 'Failed to create room' });
+    }
+  });
+};
