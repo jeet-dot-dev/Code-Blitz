@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { SocketContext } from "../../SocketContex";
+import { SocketContext } from "../SocketContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 

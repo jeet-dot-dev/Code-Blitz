@@ -2,3 +2,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.cursor {
+  background-image: radial-gradient(closest-side, #6520c4a0, #000);
+}

@@ -5,7 +5,7 @@ import Auth from "./pages/Login";
 import ProtectRoute from "./utils/ProtectRoute";
 import RoomCreate from "./pages/RoomCreate";
 import { io } from "socket.io-client";
-import { SocketContext } from "../SocketContex";
+import { SocketContext } from "./SocketContext";
 import { useState, useEffect } from "react";
 import Waiting from "./pages/Waiting";
 import ResWait from "./pages/ResWait";

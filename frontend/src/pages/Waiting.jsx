@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SocketContext } from "../../SocketContex";
+import { SocketContext } from "../SocketContext";
 import useRoomStore from "../store/roomStore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,7 @@ const Waiting = () => {
     }
 
     const roomID = localStorage.getItem("roomID");
+    console.log(roomID);
     //console.log("Room ID from localStorage:", roomID);
 
     // Initial request for room data
@@ -33,6 +34,7 @@ const Waiting = () => {
 
     // Listen for updated room data
     socket.on("roomData", (data) => {
+      console.log("haaa",data.roomData)
       useRoomStore.getState().setRoomData(data.roomData);
     });
 

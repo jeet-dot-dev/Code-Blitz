@@ -1,5 +1,5 @@
-import { io } from "../../server.js";
-import User from "../../models/userSchema.js";
+import { io } from "../../index.js";
+import User from "../../models/userSchems.js";
 import {
   createSubmission,
   getSubmission,

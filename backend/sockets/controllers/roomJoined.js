@@ -1,62 +1,82 @@
-import jwt from 'jsonwebtoken';
-import User from '../../models/userSchems.js';
-import { getRoom } from '../store/roomStore.js';
+import jwt from "jsonwebtoken";
+import { io } from "../../index.js";
+import { getRoom } from "../store/roomStore.js";
+import User from "../../models/userSchems.js";
 
 export const handleRoomJoined = async (socket, data) => {
+  //console.log("Join room request received:", data);
+  const token = data.token;
+  if (!token) {
+    //console.log("Token is required to join a room");
+    socket.emit("error", { message: "Token required to join room" });
+    return;
+  }
   try {
-    const { roomId, token } = data;
-
-    // Verify token
-    if (!token) {
-      socket.emit('error', { message: 'Authentication token required' });
-      return;
-    }
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.userId);
-
-    if (!user) {
-      socket.emit('error', { message: 'User not found' });
+    //console.log("Decoded token:", decoded);
+    const roomID = data.roomId;
+    if (!roomID) {
+      //console.log("Room ID is required to join a room");
+      socket.emit("error", { message: "Room ID required to join room" });
       return;
     }
-
-    // Check if room exists
-    const room = getRoom(roomId);
+    const room = getRoom(roomID);
     if (!room) {
-      socket.emit('error', { message: 'Room not found' });
+      //console.log("Room not found:", roomID);
+      socket.emit("error", { message: "Room not found" });
+      return;
+    }
+    // Check if the user is already in the room
+    const existingUser = room.joiner.id === decoded.userId || room.creator.id === decoded.userId;
+    if (existingUser) {
+      //console.log(`User ${decoded.userId} is already in room ${roomID}`);
+      socket.emit("error", { message: "You are already in this room" });
+      return;
+    }
+   
+
+    // Notify other clients in the room
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      //console.log("User not found:", decoded.userId);
+      socket.emit("error", { message: "User not found" });
       return;
     }
 
-    // Join the socket room
-    socket.join(roomId);
-
-    // Add user to room
-    if (!room.joiner.id) {
-      room.joiner = {
-        id: user._id,
-        username: user.username,
-        email: user.email
-      };
+    // Add the user to the room
+    room.joiner = {
+      id: user._id,
+      name: user.name,
+      elo: user.elo,
+      joinedAt: Date.now(),
+    };
+    room.players.push(user._id);
+     // check if the room is full or not
+    if (room.players.length > 2) {
+      //console.log(`Room ${roomID} is full`);
+      socket.emit("error", { message: "Room is full" });
+      return;
     }
+    // Update the room in the store
+    //console.log(room);
+    //console.log("players", room.players);
 
-    // Notify room about new joiner
-    socket.to(roomId).emit('userJoined', {
+    socket.join(roomID);
+    //console.log(`Socket ${socket.id} joined room ${roomID}`);
+
+    socket.to(roomID).emit("roomMessage", {
+      msg: `${user.name} has joined the room`,
       user: {
-        id: user._id,
-        username: user.username
+        userId: user._id,
+        username: user.name,
       },
-      room: room
     });
 
-    // Send confirmation to the user
-    socket.emit('roomJoined', {
-      message: 'Successfully joined room',
-      roomId: roomId,
-      room: room
-    });
-
-  } catch (error) {
-    console.error('Error in handleRoomJoined:', error);
-    socket.emit('error', { message: 'Failed to join room' });
+    //console.log(`User ${user.name} joined room ${roomID}`);
+    // Optionally, you can send the room data back to the client
+    io.emit("roomJoined", room);
+  } catch (err) {
+    console.error("Error joining room:", err);
+    socket.emit("error", { message: "Invalid token" });
   }
 };

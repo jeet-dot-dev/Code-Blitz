@@ -3,7 +3,7 @@ import Editor from "@monaco-editor/react";
 import DropdownComp from "./Dropdown";
 import { languageStarterCodes } from "../constant";
 import axios from "axios";
-import { SocketContext } from "../../SocketContex";
+import { SocketContext } from "../SocketContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, use } from "react"; // Add useRef import
 import { useNavigate } from "react-router-dom";
-import { SocketContext } from "../../SocketContex";
+import { SocketContext } from "../SocketContext";
 import { useContext } from "react";
 import useRoomStore from "../store/roomStore";
 import FloatingNavDemo from "../components/Navbar";
@@ -234,8 +234,8 @@ const RoomCreate = () => {
     };
 
     const handleJoinRoom = (data) => {
-      //console.log("Joined room:", data);
-      localStorage.setItem("roomID", data.roomID);
+
+      localStorage.setItem("roomID", data.roomId);
 
       navigate(`/room/waiting`);
     };
@@ -286,6 +286,7 @@ const RoomCreate = () => {
   const joinRoom = () => {
     const { roomId } = formData;
     const token = localStorage.getItem("Token");
+
 
     if (!token) {
       setError("You must be logged in to create a room");

@@ -8,8 +8,8 @@ const useFetchData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/v1/profile`,
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/profile`,{},
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("Token")}`,

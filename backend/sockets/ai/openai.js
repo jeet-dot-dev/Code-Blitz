@@ -9,7 +9,7 @@ export const client = new OpenAI({
 
 //console.log(process.env.OPENAI_API_KEY);
 
-const getQuestionsFromAi = async (topic, difficulty) => {
+const getQuestionsFromOpenAI = async (topic, difficulty) => {
   const prompt = `
 You are a professional problem setter for coding interviews. Generate one coding questions based on the following criteria:
 
@@ -40,7 +40,7 @@ Make sure the problems are unique and clear. Estimate time based on difficulty: 
 `;
 
   const response = await client.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo", // ✅ switched to 3.5
     messages: [
       {
         role: "system",
@@ -68,6 +68,6 @@ Make sure the problems are unique and clear. Estimate time based on difficulty: 
   }
 };
 
-//getQuestionsFromAi("Array","2","easy");
+//getQuestionsFromOpenAI("Array","2","easy");
 
-export default getQuestionsFromAi;
+export default getQuestionsFromOpenAI;
