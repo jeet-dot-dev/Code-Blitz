@@ -37,7 +37,7 @@ useGSAP(() => {
   const [data, setData] = useState({
     email: "",
     password: "",
-    name: "",
+    username: "",
   });
 
   const handleChange = (e) => {
