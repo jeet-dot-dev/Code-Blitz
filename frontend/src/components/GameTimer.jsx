@@ -8,7 +8,7 @@ const GameTimer = ({ handleautoSubmit }) => {
   const roomData = useRoomStore((state) => state.roomData);
 console.log("🔥 Room Data:", roomData);
 const estimatedTime = roomData?.questions?.estimatedTime
-  const [timeleft, setTimeleft] = useState(1 * 60);
+  const [timeleft, setTimeleft] = useState(estimatedTime * 60);
 //   const socket = useContext(SocketContext);
 //   const navigate = useNavigate();
 
