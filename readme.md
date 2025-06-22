@@ -51,7 +51,7 @@ Sick of boring LeetCode grinds that feel like homework?
 
 ## 🌐 Live Link
 
-👉 **https://code-blits.vercel.app/**
+👉 **https://code-blitz-ils2dcerh-jeet-mandals-projects.vercel.app/**
 
 
 
