@@ -37,7 +37,7 @@ useGSAP(() => {
   const [data, setData] = useState({
     email: "",
     password: "",
-    username: "",
+    name: "",
   });
 
   const handleChange = (e) => {
@@ -97,11 +97,11 @@ useGSAP(() => {
         <div className="space-y-8 flex flex-col items-center">
           {isSignup && (
             <InputField
-              id="username"
-              value={data.username}
+              id="name"
+              value={data.name}
               onChange={handleChange}
               icon="https://img.icons8.com/color-pixels/2x/test-account.png"
-              placeholder="Enter your username"
+              placeholder="Enter your name"
             />
           )}
           <InputField
