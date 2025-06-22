@@ -41,7 +41,7 @@ Sick of boring LeetCode grinds that feel like homework?
 
 ## 🏗️ Tech Stack
 
-- **Frontend**: React.js, TailwindCSS, JavaScript, Vite, Zustand, GSAP, Monaco Editor
+- **Frontend**: React.js, TailwindCSS, JavaScript, Vite, Zustand, GSAP, Monaco Editor + Piston API 
 - **Backend**: Node.js, Express.js, MongoDB, Socket.IO, OpenAI API
 
 
