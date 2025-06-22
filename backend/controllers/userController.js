@@ -21,7 +21,7 @@ const signupHandler = async (req,res)=>{
         password: hashedPassword
     });
     await user.save();
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET,{expiresIn : "13d"});
     res.status(201).json({ token });
  } catch (error) {
     console.error("Signup error:", error);
@@ -43,7 +43,7 @@ const loginHandler = async (req,res)=>{
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET,{expiresIn : "13d"});
         res.status(200).json({ token });
     } catch (error) {
         console.error("Login error:", error);
