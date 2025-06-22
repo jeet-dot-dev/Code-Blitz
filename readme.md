@@ -2,7 +2,6 @@
   <h1>Code-Blitz</h1>
   <em>Code-Blitz: Outcode or get outclassed</em>
   <br />
-  <img src="https://img.shields.io/github/license/jeet-dot-dev/CodeBlits?style=for-the-badge" />
   <img src="https://img.shields.io/github/languages/top/jeet-dot-dev/CodeBlits?style=for-the-badge" />
   <img src="https://img.shields.io/github/last-commit/jeet-dot-dev/CodeBlits?style=for-the-badge" />
 </div>
