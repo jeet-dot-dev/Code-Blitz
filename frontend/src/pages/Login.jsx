@@ -97,8 +97,8 @@ useGSAP(() => {
         <div className="space-y-8 flex flex-col items-center">
           {isSignup && (
             <InputField
-              id="name"
-              value={data.name}
+              id="username"
+              value={data.username}
               onChange={handleChange}
               icon="https://img.icons8.com/color-pixels/2x/test-account.png"
               placeholder="Enter your username"
