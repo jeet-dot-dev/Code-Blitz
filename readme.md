@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Code-Blitz</h1>
+  <h1>Code-Blitz (Build at Hack4Bengal 4.0)</h1>
   <em>Code-Blitz: Outcode or get outclassed</em>
   <br />
   <img src="https://img.shields.io/github/languages/top/jeet-dot-dev/CodeBlits?style=for-the-badge" />
